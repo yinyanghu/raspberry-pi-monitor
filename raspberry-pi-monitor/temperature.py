@@ -1,6 +1,6 @@
 import os
 
-CPU_TEMPERATURE_FILEPATH = '/sys/class/thermal/thermal_zone0/temp'
+import psutil
 
 
 class Temperature:
@@ -12,10 +12,11 @@ class Temperature:
         self.cpu_temperature = self.get_cpu_temperature()
 
     def get_cpu_temperature(self):
-        with open(CPU_TEMPERATURE_FILEPATH, 'r') as file:
-            t = int(file.read())
-            return t / 1000.0
+        temperatures = psutil.sensors_temperatures()
+        if not 'cpu_thermal' in temperatures:
+            return None
+        return temperatures['cpu_thermal'][0].current
 
 
-# t = Temperature()
-# print(t.cpu_temperature)
+t = Temperature()
+print(t.cpu_temperature)
