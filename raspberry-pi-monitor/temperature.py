@@ -9,8 +9,8 @@ class Temperature:
         self.update()
 
     def __str__(self):
-        return 'cpu temperature: {}'.format(self.cpu_temperature) + '\n' \
-            + 'gpu temperature: {}'.format(self.gpu_temperature)
+        return 'CPU temperature: {}'.format(self.cpu_temperature) + '\n' \
+            + 'GPU temperature: {}'.format(self.gpu_temperature)
 
     def update(self):
         self.cpu_temperature = self.get_cpu_temperature()
@@ -32,3 +32,5 @@ t = Temperature()
 print(t.cpu_temperature)
 print(t.gpu_temperature)
 print(t)
+print(type(t.cpu_temperature))
+print(type(t.gpu_temperature))
